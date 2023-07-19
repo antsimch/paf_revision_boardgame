@@ -22,12 +22,19 @@ public class GameService {
     }
 
     public List<Game> findGameByName(String name, int limit, int offset) {
-        return gameRepo.findGameByName(name, limit, offset);
+        
+        List<Game> games = gameRepo.findGameByName(name, limit, offset);
+        
+        for (Game game : games)
+            game.setAverageRating(findAverageRating(game.getGid()));
+
+        return games;
     }
 
     public Game findGameById(int id) {
-        List<Game> games = gameRepo.findGameById(id);
-        return games.get(0);
+        Game game = gameRepo.findGameById(id).get(0);
+        game.setAverageRating(findAverageRating(id));
+        return game;
     }
 
     public List<Comment> findCommentsById(int id) {
@@ -36,5 +43,14 @@ public class GameService {
 
     public int insertComment(Comment comment, int id) {
         return commentRepo.insertComment(comment, id);
+    }
+
+    public Double findAverageRating(int id) {
+
+        if (findCommentsById(id).isEmpty()) {
+            return null;
+        }
+
+        return commentRepo.findAverageRating(id);
     }
 }

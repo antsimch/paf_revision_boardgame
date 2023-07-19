@@ -15,6 +15,7 @@
                     <th>Year:</th>
                     <th>Ranking:</th>
                     <th>Users Rated:</th>
+                    <th>Average Rating:</th>
                     <th>Url:</th>
                     <th>Image:</th>
                 </thead>
@@ -25,6 +26,7 @@
                         <td th:text="*{year}"></td>
                         <td th:text="*{ranking}"></td>
                         <td th:text="*{usersRated}"></td>
+                        <td th:text="*{averageRating}"></td>
                         <td><a th:href="*{url}">Link</a></td>
                         <td><img width="50" th:src="*{image}"></td>
                     </tr>

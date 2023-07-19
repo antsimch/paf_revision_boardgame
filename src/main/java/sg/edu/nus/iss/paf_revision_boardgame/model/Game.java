@@ -19,6 +19,8 @@ public class Game {
 
     private Integer usersRated;
 
+    private Double averageRating;
+
     private String url;
 
     private String image;

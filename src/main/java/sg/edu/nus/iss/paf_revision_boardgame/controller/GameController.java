@@ -46,9 +46,11 @@ public class GameController {
         System.out.println("\n\n" + "id >>>> " + id + "\n\n");
 
         ModelAndView mav = new ModelAndView();
+        
         mav.setViewName("comments");
         mav.addObject("game", gameService.findGameById(id));
         mav.addObject("comments", gameService.findCommentsById(id));
+        mav.addObject("averageRating", gameService.findAverageRating(id));
         mav.addObject("newComment", new Comment());
         mav.setStatus(HttpStatusCode.valueOf(200));
 
@@ -65,6 +67,7 @@ public class GameController {
         mav.setViewName("comments");
         mav.addObject("game", gameService.findGameById(id));
         mav.addObject("comments", gameService.findCommentsById(id));
+        mav.addObject("averageRating", gameService.findAverageRating(id));
         mav.addObject("newComment", new Comment());
         mav.setStatus(HttpStatusCode.valueOf(201));
 
