@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1><span th:text="${game.name}"></span></h1>
+        <div>
+            <table border="1">
+                <thead>
+                    <th>Game Id:</th>
+                    <th>Name:</th>
+                    <th>Year:</th>
+                    <th>Ranking:</th>
+                    <th>Users Rated:</th>
+                    <th>Url:</th>
+                    <th>Image:</th>
+                </thead>
+                <tbody>
+                    <tr th:object="${game}">
+                        <td th:text="*{gid}"></td>
+                        <td th:text="*{name}"></td>
+                        <td th:text="*{year}"></td>
+                        <td th:text="*{ranking}"></td>
+                        <td th:text="*{usersRated}"></td>
+                        <td><a th:href="*{url}">Link</a></td>
+                        <td><img width="50" th:src="*{image}"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <div th:each="comment : ${comments}">
+                Rating: 
+                <span th:text="${comment.rating}"></span>
+                <br>
+                <span th:text="${comment.cText}"></span>
+                <br>
+                <span th:text="${comment.user}"></span>
+                <hr>
+            </div>
+
+            <hr>
+            <form action="#" method="POST" th:action="@{/api/boardgame/} + ${game.gid}" th:object="${newComment}">
+                User:
+                &emsp;
+                &ensp;
+                <input type="text" th:field="*{user}" placeholder="User">
+                <br>
+                Rating:
+                &emsp;
+                <input type="text" th:field="*{rating}" placeholder="Rating">
+                <br>
+                Comment:
+                <textarea th:field="*{cText}" cols="50" rows="5"></textarea>
+                <br>
+                <button type="submit">Post</button>
+            </form>
+        </div>
+        <hr>
+        <div>
+            <form action="#" method="GET" th:action="@{/}">
+                <button type="submit">Home</button>
+            </form>
+        </div>
+    </body>
+</html>
